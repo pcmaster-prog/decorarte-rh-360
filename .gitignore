@@ -40,3 +40,5 @@ backend/storage/logs/*.log
 *.sln
 *.sw?
 
+
+.vercel

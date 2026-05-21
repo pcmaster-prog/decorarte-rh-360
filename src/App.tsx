@@ -61,16 +61,18 @@ function MainAppContent() {
     return (
       <div className="flex flex-col h-screen w-screen bg-slate-950 overflow-hidden">
         {/* Developer preview banner */}
-        <div className="bg-indigo-950/40 border-b border-indigo-900/30 px-6 py-2 flex items-center justify-between text-xs z-50">
+        <div className="bg-indigo-950/40 border-b border-indigo-900/30 px-4 sm:px-6 py-2 flex items-center justify-between text-xs z-50">
           <span className="text-slate-350 flex items-center space-x-1.5 font-sans">
-            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping" />
-            <span>Simulador de Aspirante Público (DecorArte ATS)</span>
+            <span className="h-2 w-2 rounded-full bg-indigo-500 animate-ping shrink-0" />
+            <span className="truncate max-w-[170px] sm:max-w-none">
+              Simulador de Aspirante <span className="hidden sm:inline">Público (DecorArte ATS)</span>
+            </span>
           </span>
           <button
             onClick={() => setActiveRole('Administrador')}
-            className="px-3 py-1 bg-indigo-650 hover:bg-indigo-600 rounded text-[10px] font-bold text-white transition-all shadow-md shadow-indigo-650/15 font-sans"
+            className="px-2.5 py-1 bg-indigo-650 hover:bg-indigo-600 rounded text-[10px] font-bold text-white transition-all shadow-md shadow-indigo-650/15 font-sans shrink-0"
           >
-            Volver a Administrador
+            Volver <span className="hidden sm:inline">a Administrador</span>
           </button>
         </div>
         <div className="flex-1 overflow-y-auto">

@@ -56,6 +56,8 @@ interface AppContextProps {
   setActiveRole: (role: Role) => void;
   activeUser: ActiveUser;
   setActiveUser: React.Dispatch<React.SetStateAction<ActiveUser>>;
+  sidebarOpen: boolean;
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 
   // Configurations
   configuracionLaboral: ConfiguracionLaboral;
@@ -511,6 +513,7 @@ const initialConfiguracionLaboral: ConfiguracionLaboral = {
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const isApi = import.meta.env.VITE_API_MODE === 'api';
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Local state fallbacks (Mock Mode)
   const [configuracionLaboral, setConfiguracionLaboral] = useState<ConfiguracionLaboral>(() => {
@@ -847,6 +850,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setActiveRole,
         activeUser,
         setActiveUser,
+        sidebarOpen,
+        setSidebarOpen,
         configuracionLaboral,
         updateConfiguracionLaboral,
         puestos: activePuestos,

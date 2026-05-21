@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp, type Role } from '../context/AppContext';
-import { Flame, Trophy, Award, Shield, ChevronDown } from 'lucide-react';
+import { Flame, Trophy, Award, Shield, ChevronDown, Menu } from 'lucide-react';
 
 interface HeaderProps {
   currentTab: string;
@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentTab, setCurrentTab }) => {
-  const { activeRole, setActiveRole, activeUser } = useApp();
+  const { activeRole, setActiveRole, activeUser, setSidebarOpen } = useApp();
 
   const rolesList: { value: Role; label: string; desc: string }[] = [
     { value: 'Administrador', label: 'Administrador', desc: 'Acceso total y herramientas de desarrollo' },
@@ -26,12 +26,21 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, setCurrentTab }) => 
   return (
     <header className="glass-panel sticky top-0 z-40 flex h-20 items-center justify-between px-6 border-b border-slate-800/80 bg-slate-950/80 shadow-md">
       {/* Brand & Active Area Indicator */}
-      <div className="flex items-center space-x-3">
-        <span className="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-wide">
-          DecorArte RH 360
+      <div className="flex items-center space-x-2 sm:space-x-3">
+        {/* Hamburger Toggle Button for mobile */}
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden p-2 -ml-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900 focus:outline-none transition-colors"
+          aria-label="Abrir Menú"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
+
+        <span className="text-sm sm:text-base md:text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-wide truncate max-w-[120px] xs:max-w-[150px] sm:max-w-none">
+          DecorArte <span className="hidden xs:inline">RH 360</span>
         </span>
-        <span className="text-slate-500">|</span>
-        <span className="text-sm font-medium text-slate-300 capitalize px-2 py-1 bg-slate-800/50 rounded-md border border-slate-700/30">
+        <span className="hidden md:inline text-slate-500">|</span>
+        <span className="hidden md:inline text-sm font-medium text-slate-300 capitalize px-2 py-1 bg-slate-800/50 rounded-md border border-slate-700/30">
           {currentTab.replace('-', ' ')}
         </span>
       </div>
@@ -63,10 +72,10 @@ export const Header: React.FC<HeaderProps> = ({ currentTab, setCurrentTab }) => 
       <div className="flex items-center space-x-4">
         {/* Dynamic RBAC Switcher dropdown */}
         <div className="relative group">
-          <button className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-slate-900 border border-slate-700/80 text-xs font-semibold text-slate-200 hover:border-indigo-500 hover:text-indigo-400 transition-all duration-200">
-            <Shield className="h-3.5 w-3.5 text-indigo-400" />
-            <span>SIMULANDO: {activeRole}</span>
-            <ChevronDown className="h-3 w-3 text-slate-400 group-hover:text-indigo-400 transition-transform duration-200" />
+          <button className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-slate-900 border border-slate-700/80 text-[10px] sm:text-xs font-semibold text-slate-200 hover:border-indigo-500 hover:text-indigo-400 transition-all duration-200">
+            <Shield className="h-3.5 w-3.5 text-indigo-400 shrink-0" />
+            <span><span className="hidden sm:inline">SIMULANDO: </span>{activeRole}</span>
+            <ChevronDown className="h-3 w-3 text-slate-400 group-hover:text-indigo-400 transition-transform duration-200 shrink-0" />
           </button>
           
           {/* Dropdown Box */}
